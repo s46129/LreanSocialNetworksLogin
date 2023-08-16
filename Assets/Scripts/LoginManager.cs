@@ -22,7 +22,8 @@ public class LoginManager : MonoBehaviour
             result.Match(
                 value =>
                 {
-                    resultText.text = "Login OK. User display name: " + value.UserProfile.DisplayName;
+                    resultText.text =
+                        $"Login success.\n User ID{value.UserProfile.UserId} \nUser display name: {value.UserProfile.DisplayName} ";
                     Debug.Log("Login OK. User display name: " + value.UserProfile.DisplayName);
                 },
                 error =>
