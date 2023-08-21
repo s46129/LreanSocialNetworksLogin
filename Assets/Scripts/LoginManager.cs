@@ -1,7 +1,6 @@
 using Line.LineSDK;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class LoginManager : MonoBehaviour
@@ -44,7 +43,8 @@ public class LoginManager : MonoBehaviour
         {
             if (success)
             {
-                resultText.text = "Login Unity Social success.";
+                resultText.text = "Login Unity Social success.\n user display name: " + Social.localUser.userName +
+                                  "\n user id: " + Social.localUser.id;
                 Debug.Log("Login OK. User display name: " + Social.localUser.userName);
             }
             else
