@@ -1,57 +1,24 @@
-using Line.LineSDK;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LoginManager : MonoBehaviour
+namespace RexScripts
 {
-    [SerializeField] private Button lineButton;
-    [SerializeField] private Button unitySocialButton;
-    [SerializeField] TextMeshProUGUI resultText;
-
-    private void Start()
+    public class LoginManager : MonoBehaviour
     {
-        lineButton.onClick.AddListener(LoginLine);
-        unitySocialButton.onClick.AddListener(LoginUnitySocial);
-    }
+        [SerializeField] private TextMeshProUGUI resultText;
 
+        private static LoginManager Instance { get; set; }
 
-    private void LoginLine()
-    {
-        var scopes = new string[] { "profile", "openid" };
-        LineSDK.Instance.Login(scopes, result =>
+        private void Awake()
         {
-            result.Match(
-                value =>
-                {
-                    resultText.text =
-                        $"Login success.\n User ID{value.UserProfile.UserId} \nUser display name: {value.UserProfile.DisplayName} ";
-                    Debug.Log("Login OK. User display name: " + value.UserProfile.DisplayName);
-                },
-                error =>
-                {
-                    resultText.text = "Login failed, reason: " + error.Message;
-                    Debug.Log("Login failed, reason: " + error.Message);
-                }
-            );
-        });
-    }
+            Instance = this;
+        }
 
-    private void LoginUnitySocial()
-    {
-        Social.localUser.Authenticate(success =>
+        public static void OnGetResult(LoginResult result)
         {
-            if (success)
-            {
-                resultText.text = "Login Unity Social success.\n user display name: " + Social.localUser.userName +
-                                  "\n user id: " + Social.localUser.id;
-                Debug.Log("Login OK. User display name: " + Social.localUser.userName);
-            }
-            else
-            {
-                resultText.text = "Login Unity Social failed.";
-                Debug.Log("Login failed.");
-            }
-        });
+            Instance.resultText.text = result.IsSuccess
+                ? $"Login success.\n User ID{result.UserProfile.UserId} \nUser display name: {result.UserProfile.UserName} "
+                : $"Login failed, reason: {result.Message}";
+        }
     }
 }
