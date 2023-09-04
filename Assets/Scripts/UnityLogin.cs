@@ -12,7 +12,8 @@ namespace RexScripts
                     ? new LoginResult
                     {
                         IsSuccess = true,
-                        UserProfile = new UserProfile(Social.localUser.id, Social.localUser.userName)
+                        UserProfile = new UserProfile(Social.localUser.id, Social.localUser.userName),
+                        Message = "Login Unity Social success."
                     }
                     : new LoginResult
                     {

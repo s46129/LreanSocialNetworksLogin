@@ -2,8 +2,8 @@
 {
     public class LoginResult
     {
-        public bool IsSuccess;
-        public string Message;
+        public bool IsSuccess = false;
+        public string Message = "";
         public UserProfile UserProfile;
     }
 }

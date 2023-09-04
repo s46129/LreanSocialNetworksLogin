@@ -15,7 +15,8 @@ namespace RexScripts
                         var loginResult = new LoginResult
                         {
                             IsSuccess = true,
-                            UserProfile = new UserProfile(value.UserProfile.UserId, value.UserProfile.DisplayName)
+                            UserProfile = new UserProfile(value.UserProfile.UserId, value.UserProfile.DisplayName),
+                            Message = "Login Line success."
                         };
                         LoginManager.OnGetResult(loginResult);
                     },

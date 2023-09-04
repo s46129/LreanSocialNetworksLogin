@@ -17,7 +17,7 @@ namespace RexScripts
         public static void OnGetResult(LoginResult result)
         {
             Instance.resultText.text = result.IsSuccess
-                ? $"Login success.\n User ID{result.UserProfile.UserId} \nUser display name: {result.UserProfile.UserName} "
+                ? $"Login success.\n User ID{result.UserProfile.UserId} \nUser display name: {result.UserProfile.UserName}\nLogin failed, reason: {result.Message}"
                 : $"Login failed, reason: {result.Message}";
         }
     }
